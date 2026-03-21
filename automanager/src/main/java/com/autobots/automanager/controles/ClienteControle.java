@@ -13,46 +13,51 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.autobots.automanager.entidades.Cliente;
-import com.autobots.automanager.modelo.entidade.cliente.ClienteAtualizador;
-import com.autobots.automanager.modelo.entidade.cliente.ClienteSelecionador;
-import com.autobots.automanager.repositorios.ClienteRepositorio;
+import com.autobots.automanager.modelo.dto.cliente.ClienteAtualizacaoDTO;
+import com.autobots.automanager.modelo.dto.cliente.ClienteCadastroDTO;
+import com.autobots.automanager.servicos.cliente.AtualizadorClienteServico;
+import com.autobots.automanager.servicos.cliente.CadastradorClienteServico;
+import com.autobots.automanager.servicos.cliente.ConsultadorClienteServico;
+import com.autobots.automanager.servicos.cliente.RemovedorClienteServico;
 
 @RestController
-@RequestMapping("/cliente")
+@RequestMapping("/clientes")
 public class ClienteControle {
-	@Autowired
-	private ClienteRepositorio repositorio;
-	@Autowired
-	private ClienteSelecionador selecionador;
 
-	@GetMapping("/cliente/{id}")
-	public Cliente obterCliente(@PathVariable long id) {
-		List<Cliente> clientes = repositorio.findAll();
-		return selecionador.selecionar(clientes, id);
-	}
+    @Autowired
+    private CadastradorClienteServico cadastrador;
 
-	@GetMapping("/clientes")
-	public List<Cliente> obterClientes() {
-		List<Cliente> clientes = repositorio.findAll();
-		return clientes;
-	}
+    @Autowired
+    private ConsultadorClienteServico consultador;
 
-	@PostMapping("/cadastro")
-	public void cadastrarCliente(@RequestBody Cliente cliente) {
-		repositorio.save(cliente);
-	}
+    @Autowired
+    private AtualizadorClienteServico atualizador;
 
-	@PutMapping("/atualizar")
-	public void atualizarCliente(@RequestBody Cliente atualizacao) {
-		Cliente cliente = repositorio.getById(atualizacao.getId());
-		ClienteAtualizador atualizador = new ClienteAtualizador();
-		atualizador.atualizar(cliente, atualizacao);
-		repositorio.save(cliente);
-	}
+    @Autowired
+    private RemovedorClienteServico removedor;
 
-	@DeleteMapping("/excluir")
-	public void excluirCliente(@RequestBody Cliente exclusao) {
-		Cliente cliente = repositorio.getById(exclusao.getId());
-		repositorio.delete(cliente);
-	}
+    @GetMapping("/{id}")
+    public Cliente obterCliente(@PathVariable Long id) {
+        return consultador.buscarPorId(id);
+    }
+
+    @GetMapping
+    public List<Cliente> obterClientes() {
+        return consultador.listar();
+    }
+
+    @PostMapping
+    public Cliente cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
+        return cadastrador.cadastrar(cliente);
+    }
+
+    @PutMapping
+    public Cliente atualizarCliente(@RequestBody ClienteAtualizacaoDTO atualizacao) {
+        return atualizador.atualizar(atualizacao);
+    }
+
+    @DeleteMapping("/{id}")
+    public void excluirCliente(@PathVariable Long id) {
+        removedor.removerPorId(id);
+    }
 }
