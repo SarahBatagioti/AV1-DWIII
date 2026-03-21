@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo.entidade.telefone;
+package com.autobots.automanager.modelo.atualizadores.telefone;
 
 import java.util.List;
 

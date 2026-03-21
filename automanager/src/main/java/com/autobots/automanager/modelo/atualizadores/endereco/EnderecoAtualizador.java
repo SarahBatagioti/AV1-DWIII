@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo.entidade.endereco;
+package com.autobots.automanager.modelo.atualizadores.endereco;
 
 import com.autobots.automanager.entidades.Endereco;
 import com.autobots.automanager.modelo.StringVerificadorNulo;

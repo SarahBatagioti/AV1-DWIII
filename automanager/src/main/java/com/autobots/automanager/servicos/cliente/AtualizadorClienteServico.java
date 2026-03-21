@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.autobots.automanager.entidades.Cliente;
+import com.autobots.automanager.modelo.atualizadores.cliente.ClienteAtualizador;
 import com.autobots.automanager.modelo.dto.cliente.ClienteAtualizacaoDTO;
-import com.autobots.automanager.modelo.entidade.cliente.ClienteAtualizador;
 import com.autobots.automanager.repositorios.ClienteRepositorio;
 
 @Service

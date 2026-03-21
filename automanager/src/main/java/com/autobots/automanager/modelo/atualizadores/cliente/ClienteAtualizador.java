@@ -1,10 +1,10 @@
-package com.autobots.automanager.modelo.entidade.cliente;
+package com.autobots.automanager.modelo.atualizadores.cliente;
 
 import com.autobots.automanager.entidades.Cliente;
 import com.autobots.automanager.modelo.StringVerificadorNulo;
-import com.autobots.automanager.modelo.entidade.documento.DocumentoAtualizador;
-import com.autobots.automanager.modelo.entidade.endereco.EnderecoAtualizador;
-import com.autobots.automanager.modelo.entidade.telefone.TelefoneAtualizador;
+import com.autobots.automanager.modelo.atualizadores.documento.DocumentoAtualizador;
+import com.autobots.automanager.modelo.atualizadores.endereco.EnderecoAtualizador;
+import com.autobots.automanager.modelo.atualizadores.telefone.TelefoneAtualizador;
 
 public class ClienteAtualizador {
 	private StringVerificadorNulo verificador = new StringVerificadorNulo();

@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo.entidade.cliente;
+package com.autobots.automanager.modelo.atualizadores.cliente;
 
 import java.util.List;
 

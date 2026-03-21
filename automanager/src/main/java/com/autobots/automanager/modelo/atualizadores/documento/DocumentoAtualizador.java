@@ -1,4 +1,4 @@
-package com.autobots.automanager.modelo.entidade.documento;
+package com.autobots.automanager.modelo.atualizadores.documento;
 
 import java.util.List;
 
