@@ -3,6 +3,8 @@ package com.autobots.automanager.controles;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,27 +39,33 @@ public class ClienteControle {
     private RemovedorClienteServico removedor;
 
     @GetMapping("/{id}")
-    public Cliente obterCliente(@PathVariable Long id) {
-        return consultador.buscarPorId(id);
+    public ResponseEntity<Cliente> obterCliente(@PathVariable Long id) {
+        Cliente cliente = consultador.buscarPorId(id);
+        return ResponseEntity.ok(cliente);
     }
 
     @GetMapping
-    public List<Cliente> obterClientes() {
-        return consultador.listar();
+    public ResponseEntity<List<Cliente>> obterClientes() {
+        List<Cliente> clientes = consultador.listar();
+        return ResponseEntity.ok(clientes);
     }
 
     @PostMapping
-    public Cliente cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
-        return cadastrador.cadastrar(cliente);
+    public ResponseEntity<Cliente> cadastrarCliente(@RequestBody ClienteCadastroDTO cliente) {
+        Cliente clienteCriado = cadastrador.cadastrar(cliente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteCriado);
     }
 
-    @PutMapping
-    public Cliente atualizarCliente(@RequestBody ClienteAtualizacaoDTO atualizacao) {
-        return atualizador.atualizar(atualizacao);
+    @PutMapping("/{id}")
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody ClienteAtualizacaoDTO atualizacao) {
+        atualizacao.setId(id);
+        Cliente clienteAtualizado = atualizador.atualizar(atualizacao);
+        return ResponseEntity.ok(clienteAtualizado);
     }
 
     @DeleteMapping("/{id}")
-    public void excluirCliente(@PathVariable Long id) {
+    public ResponseEntity<Void> excluirCliente(@PathVariable Long id) {
         removedor.removerPorId(id);
+        return ResponseEntity.noContent().build();
     }
 }
