@@ -20,6 +20,9 @@ public class DocumentoAtualizador {
 	}
 
 	public void atualizar(List<Documento> documentos, List<Documento> atualizacoes) {
+		if (documentos == null || atualizacoes == null) {
+			return;
+		}
 		for (Documento atualizacao : atualizacoes) {
 			for (Documento documento : documentos) {
 				if (atualizacao.getId() != null) {

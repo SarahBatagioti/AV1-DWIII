@@ -9,7 +9,7 @@ public class TelefoneAtualizador {
 	private StringVerificadorNulo verificador = new StringVerificadorNulo();
 
 	public void atualizar(Telefone telefone, Telefone atualizacao) {
-		if (atualizacao != null) {
+		if (telefone != null && atualizacao != null) {
 			if (!verificador.verificar(atualizacao.getDdd())) {
 				telefone.setDdd(atualizacao.getDdd());
 			}
@@ -20,10 +20,13 @@ public class TelefoneAtualizador {
 	}
 
 	public void atualizar(List<Telefone> telefones, List<Telefone> atualizacoes) {
+		if (telefones == null || atualizacoes == null) {
+			return;
+		}
 		for (Telefone atualizacao : atualizacoes) {
 			for (Telefone telefone : telefones) {
 				if (atualizacao.getId() != null) {
-					if (atualizacao.getId() == telefone.getId()) {
+					if (atualizacao.getId().equals(telefone.getId())) {
 						atualizar(telefone, atualizacao);
 					}
 				}
