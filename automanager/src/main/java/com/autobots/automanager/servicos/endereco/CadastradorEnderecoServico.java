@@ -32,8 +32,8 @@ public class CadastradorEnderecoServico {
         endereco.setInformacoesAdicionais(dto.getInformacoesAdicionais());
 
         cliente.setEndereco(endereco);
-        clienteRepositorio.save(cliente);
+        Cliente clientePersistido = clienteRepositorio.saveAndFlush(cliente);
 
-        return endereco;
+        return clientePersistido.getEndereco();
     }
 }

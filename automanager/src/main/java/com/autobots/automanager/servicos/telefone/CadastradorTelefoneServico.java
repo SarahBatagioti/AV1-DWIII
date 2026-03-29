@@ -23,8 +23,8 @@ public class CadastradorTelefoneServico {
         telefone.setNumero(dto.getNumero());
 
         cliente.getTelefones().add(telefone);
-        clienteRepositorio.save(cliente);
+        Cliente clientePersistido = clienteRepositorio.saveAndFlush(cliente);
 
-        return telefone;
+        return clientePersistido.getTelefones().get(clientePersistido.getTelefones().size() - 1);
     }
 }

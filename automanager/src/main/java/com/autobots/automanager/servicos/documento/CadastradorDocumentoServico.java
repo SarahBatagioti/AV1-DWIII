@@ -23,9 +23,9 @@ public class CadastradorDocumentoServico {
         documento.setNumero(dto.getNumero());
 
         cliente.getDocumentos().add(documento);
-        clienteRepositorio.save(cliente);
+        Cliente clientePersistido = clienteRepositorio.saveAndFlush(cliente);
 
-        return documento;
+        return clientePersistido.getDocumentos().get(clientePersistido.getDocumentos().size() - 1);
     }
 
 }
